@@ -1,16 +1,30 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { usersApi } from "../entities/user";
-import { postsApi } from "../entities/post";
+import { Dispatch } from "react";
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  AnyAction,
+} from "redux";
+import thunk, { ThunkAction, ThunkDispatch } from "redux-thunk";
+import postsReducer from "../entities/post/reducer";
+import usersReducer from "../entities/user/reducer";
 
-export const store = configureStore({
-  reducer: {
-    [usersApi.reducerPath]: usersApi.reducer,
-    [postsApi.reducerPath]: postsApi.reducer,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(usersApi.middleware, postsApi.middleware),
-});
+const store = createStore(
+  combineReducers({
+    users: usersReducer,
+    posts: postsReducer,
+  }),
+  applyMiddleware(thunk)
+);
 
-export type AppDispatch = typeof store.dispatch;
+export default store;
 
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export type TypedDispatch = ThunkDispatch<RootState, unknown, AnyAction>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  AnyAction
+>;

@@ -1,1 +1,1 @@
-# Redux toolkit
+# Redux thunk

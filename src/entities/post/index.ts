@@ -1,3 +1,3 @@
-export * from "./post-model";
-export { default as PostCard } from "./PostCard";
-export { default as Comment } from "./Comment";
+export * from "./ui";
+export * from "./actions";
+export { default as postsReducer, selectPostComments } from "./reducer";

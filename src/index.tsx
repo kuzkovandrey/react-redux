@@ -4,11 +4,15 @@ import App from "./app";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import store from "./app/store";
 import { BrowserRouter } from "react-router-dom";
+import { fetchUsers } from "./entities/user/actions";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
+
+// @ts-ignore
+store.dispatch(fetchUsers());
 
 root.render(
   <React.StrictMode>
