@@ -1,14 +1,9 @@
-import { CircularProgress, Container, SxProps } from "@mui/material";
+import { CircularProgress, Stack } from "@mui/material";
 import { useEffect } from "react";
-import { PostCard } from "../entities/post";
-import { fetchPostsByIdList } from "../entities/post/actions";
+import { PostCard, fetchPostsByIdList } from "../entities/post";
 import { useSelectUsers } from "../entities/user/useSelectUsers";
 import ShowComment from "../features/ShowComment";
 import { useAppDispatch, useAppSelector } from "../shared/hooks";
-
-const containerStyles: SxProps = {
-  "& > *:not(:last-child)": { marginBottom: 2 },
-};
 
 function PostList() {
   const dispatch = useAppDispatch();
@@ -29,16 +24,16 @@ function PostList() {
   }
 
   return (
-    <Container sx={containerStyles}>
+    <Stack spacing={2}>
       {posts.map(({ title, body, id }) => (
         <PostCard
           key={id}
           title={title}
           body={body}
-          showComment={<ShowComment postId={id} />}
+          showCommentSlot={<ShowComment postId={id} />}
         />
       ))}
-    </Container>
+    </Stack>
   );
 }
 

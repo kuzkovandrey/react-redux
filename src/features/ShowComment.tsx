@@ -1,7 +1,10 @@
-import { Button, CircularProgress } from "@mui/material";
+import { Button, CircularProgress, Stack } from "@mui/material";
 import { useState } from "react";
-import { Comment } from "../entities/post";
-import { selectPostComments, fetchCommentsByPostId } from "../entities/post";
+import {
+  selectPostComments,
+  fetchCommentsByPostId,
+  Comment,
+} from "../entities/post";
 import { useAppDispatch, useAppSelector } from "../shared/hooks";
 
 interface ShowCommentProps {
@@ -30,19 +33,23 @@ function ShowComment({ postId }: ShowCommentProps) {
   }
 
   return (
-    <>
-      <Button disabled={isLoading} onClick={handleClick}>
-        {isShow ? "Hide comments" : "Show comments"}
-      </Button>
+    <div>
+      <Stack alignItems="center" direction="row">
+        <Button disabled={isLoading} onClick={handleClick}>
+          {isShow ? "Hide comments" : "Show comments"}
+        </Button>
 
-      {isLoading && <CircularProgress sx={{ marginLeft: 2 }} size={20} />}
+        {isLoading && <CircularProgress sx={{ marginLeft: 2 }} size={20} />}
+      </Stack>
 
-      {isShow &&
-        !!comments.length &&
-        comments.map(({ name, body, id }) => (
-          <Comment key={id} name={name} body={body} />
-        ))}
-    </>
+      {isShow && !!comments.length && (
+        <Stack sx={{ marginTop: 2 }} spacing={2}>
+          {comments.map(({ name, body, id }) => (
+            <Comment key={id} name={name} body={body} />
+          ))}
+        </Stack>
+      )}
+    </div>
   );
 }
 

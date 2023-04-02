@@ -5,7 +5,6 @@ import {
   Checkbox,
   ListItemButton,
   ListItemText,
-  Container,
 } from "@mui/material";
 import { useSelectUsers } from "../entities/user/useSelectUsers";
 import { useAppSelector } from "../shared/hooks";
@@ -27,18 +26,16 @@ function Filter() {
   }
 
   return (
-    <Container>
-      <List>
-        {userList.map(({ id, username }) => (
-          <ListItem key={id}>
-            <ListItemButton onClick={() => toggleUserId(id)}>
-              <Checkbox checked={isSelectedId(id)} />
-              <ListItemText id={username} primary={username} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Container>
+    <List>
+      {userList.map(({ id, username }) => (
+        <ListItem key={id}>
+          <ListItemButton onClick={() => toggleUserId(id)}>
+            <Checkbox checked={isSelectedId(id)} />
+            <ListItemText id={username} primary={username} />
+          </ListItemButton>
+        </ListItem>
+      ))}
+    </List>
   );
 }
 

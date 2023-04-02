@@ -1,25 +1,22 @@
-import { Card, SxProps, Typography } from "@mui/material";
+import { Card, Stack, Typography } from "@mui/material";
 import { ReactNode } from "react";
 
 interface PostCardProps {
   title: string;
   body: string;
-  showComment: ReactNode;
+  showCommentSlot: ReactNode;
 }
 
-function PostCard({ title, body, showComment }: PostCardProps) {
+function PostCard({ title, body, showCommentSlot }: PostCardProps) {
   return (
-    <Card sx={cardStyles}>
-      <Typography variant="h5">{title}</Typography>
-      <Typography variant="body2">{body}</Typography>
-      {showComment}
+    <Card sx={{ p: 2 }}>
+      <Stack spacing={2}>
+        <Typography variant="h5">{title}</Typography>
+        <Typography variant="body2">{body}</Typography>
+        {showCommentSlot}
+      </Stack>
     </Card>
   );
 }
-
-const cardStyles: SxProps = {
-  "& > *:not(:last-child)": { marginBottom: 2 },
-  p: 2,
-};
 
 export default PostCard;
