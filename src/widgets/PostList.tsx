@@ -1,12 +1,8 @@
-import { CircularProgress, Container, SxProps } from "@mui/material";
+import { CircularProgress, Stack } from "@mui/material";
 import { useSearchParams } from "react-router-dom";
 
 import { useGetPostsQuery, PostCard } from "../entities/post";
 import ShowComment from "../features/ShowComment";
-
-const containerStyles: SxProps = {
-  "& > *:not(:last-child)": { marginBottom: 2 },
-};
 
 function PostList() {
   const [searchParams] = useSearchParams();
@@ -25,7 +21,7 @@ function PostList() {
   }
 
   return (
-    <Container sx={containerStyles}>
+    <Stack spacing={2}>
       {posts.map(({ title, body, id }) => (
         <PostCard
           key={id}
@@ -34,7 +30,7 @@ function PostList() {
           showComment={<ShowComment postId={id} />}
         />
       ))}
-    </Container>
+    </Stack>
   );
 }
 

@@ -7,7 +7,7 @@ interface CommentProps {
 
 function Comment({ name, body }: CommentProps) {
   return (
-    <Card>
+    <Card sx={{ p: 2 }}>
       <Typography sx={{ marginBottom: 1 }} variant="h5">
         {name}
       </Typography>

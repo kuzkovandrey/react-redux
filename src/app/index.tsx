@@ -1,12 +1,13 @@
 import PostList from "../widgets/PostList";
 import Filter from "../features/Filter";
+import Container from "@mui/material/Container";
 
 function App() {
   return (
-    <main>
+    <Container>
       <Filter />
       <PostList />
-    </main>
+    </Container>
   );
 }
 

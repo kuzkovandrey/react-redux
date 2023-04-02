@@ -1,11 +1,6 @@
-import { Button, CircularProgress, Container, SxProps } from "@mui/material";
 import { useState } from "react";
-
+import { Button, CircularProgress, Stack } from "@mui/material";
 import { Comment, useGetPostCommentsQuery } from "../entities/post";
-
-const containerStyles: SxProps = {
-  "& > *:not(:last-child)": { marginBottom: 2 },
-};
 
 interface ShowCommentProps {
   postId: number;
@@ -22,21 +17,22 @@ function ShowComment({ postId }: ShowCommentProps) {
   );
 
   return (
-    <>
-      <Button variant="outlined" onClick={() => setIsShow((show) => !show)}>
-        {isShow ? "Hide comments" : "Show comments"}
-      </Button>
-
-      {isLoading && <CircularProgress />}
+    <div>
+      <Stack alignItems="center" direction="row" spacing={2}>
+        <Button variant="outlined" onClick={() => setIsShow((show) => !show)}>
+          {isShow ? "Hide comments" : "Show comments"}
+        </Button>
+        {isLoading && <CircularProgress size={20} />}
+      </Stack>
 
       {isShow && (
-        <Container sx={containerStyles}>
+        <Stack sx={{ marginTop: 2 }} spacing={2}>
           {comments.map(({ name, body, id }) => (
             <Comment key={id} name={name} body={body} />
           ))}
-        </Container>
+        </Stack>
       )}
-    </>
+    </div>
   );
 }
 
